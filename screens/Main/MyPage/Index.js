@@ -20,4 +20,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(null, mapDispatchToProps) (ExploreContainer);
+export default connect(null, mapDispatchToProps) (MyPageContainer);

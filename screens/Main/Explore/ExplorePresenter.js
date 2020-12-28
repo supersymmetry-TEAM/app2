@@ -17,7 +17,7 @@ export default (probs) =>
  return (
   <Container style={{backgroundColor: '#FFFFFF'}}>
           <TouchableOpacity onPress={probs.logout}>
-          <Text>Log Out</Text>
+          <Text>Log Out, Explore</Text>
         </TouchableOpacity>
   </Container>
 );

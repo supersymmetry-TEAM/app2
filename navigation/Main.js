@@ -39,11 +39,11 @@ tabBarOptions={{
 screenOptions={({ route }) => ({
   tabBarIcon: ({ focused }) => {
     let iconName = ``;
-    if (route.name === "검색") {
-      iconName += "search"; 
+    if (route.name === "식단입력") {
+      iconName += "edit-3"; 
     } 
-    else if (route.name === "대화") {
-      iconName += "message-circle";
+    else if (route.name === "마이페이지") {
+      iconName += "github";
     }else if (route.name === "Favs") {
       iconName += "heart";
     } else if (route.name === "최근 댓글") {
@@ -55,8 +55,8 @@ screenOptions={({ route }) => ({
   }
 })}
 >
-<TabNav.Screen name="검색" component={Explore}/>
-<TabNav.Screen name="검색" component={MyPage}/>
+<TabNav.Screen name="식단입력" component={Explore}/>
+<TabNav.Screen name="마이페이지" component={MyPage}/>
 
 </TabNav.Navigator>
 )
