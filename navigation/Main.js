@@ -1,11 +1,14 @@
 import React from "react";
+import styled from "styled-components/native";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Feather } from '@expo/vector-icons';
+
 import Explore from "../screens/Main/Explore/Index";
 import MyPage from "../screens/Main/MyPage/Index";
+import Search from "../screens/Main/Search/Index";
 
-import styled from "styled-components/native";
 
 const TabNav = createBottomTabNavigator();
 const SearchContainer =  styled.View`
