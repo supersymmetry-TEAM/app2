@@ -41,11 +41,12 @@ export default ({ navigation }) => {
       }
       );
       if (status === 200 || 201)
-      {
+      { console.log("sign in"+status);
         alert("Account created. Sign in. please.");
         navigation.navigate('SignIn', { email, password });
       }
     } catch(e){
+
       alert("문제있어.");
 
     

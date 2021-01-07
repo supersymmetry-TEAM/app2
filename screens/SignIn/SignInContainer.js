@@ -26,7 +26,12 @@ export default ({ route: { params } }) => {
       return false;
     }
     dispatch(
-      userLogin()
+      userLogin(
+        {
+          username :username,
+          password : password
+        }
+        )
     );
 
   };

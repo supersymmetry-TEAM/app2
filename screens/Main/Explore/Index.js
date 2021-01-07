@@ -6,6 +6,9 @@ import {logOut} from "../../../redux/usersSlice";
 
 function mapStateToProps(state) {
   return {
+    token: state.usersReducer.token,
+    id: state.usersReducer.id,
+    info : state.usersReducer.info,
   };
 }
 
@@ -20,4 +23,4 @@ function mapDispatchToProps(dispatch) {
 
 
 
-export default connect(null, mapDispatchToProps) (ExploreContainer);
+export default connect(mapStateToProps, mapDispatchToProps) (ExploreContainer);

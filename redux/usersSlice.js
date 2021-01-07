@@ -4,7 +4,6 @@ import api from "../api";
 const userSlice = createSlice({
   name: "users",
   initialState: {
-    isLoggedIn: false,
     token: null,
     id: null,
     info: null,
@@ -12,9 +11,8 @@ const userSlice = createSlice({
   },
   reducers: {
     logIn(state, action) {
-      state.isLoggedIn = true;
-      // state.token = action.payload.token;
-      // state.id = action.payload.id;
+      state.token = action.payload.token;
+      state.id = action.payload.id;
 
     },
     logOut(state, action) {
@@ -27,7 +25,16 @@ const userSlice = createSlice({
   }
 });
 export const userLogin = form => async dispatch => {
-dispatch(logIn());
+try{
+const data = await api.login(form);
+if(data){
+  console.log(data.data);
+  dispatch(logIn(data.data));
+}
+}
+catch(e){
+
+}
 };
 
 export const getInfo = () => async (dispatch, getState) => {

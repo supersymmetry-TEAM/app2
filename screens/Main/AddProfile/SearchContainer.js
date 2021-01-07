@@ -4,7 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default (probs) => {
-
+  const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
+  const [pickedTime, setPickedTime] = React.useState("");
   const navigation = useNavigation();
   const [PageCount, setPageCount] = useState(2)
   const [Data, setData] = useState([])
@@ -63,10 +64,25 @@ export default (probs) => {
     // make post Api 
     navigation.navigate("식단입력",{pickedTime})
   };
-  
-  return (
-<SearchPresenter 
-    
+  const showDatePicker_ = () => {
+    setTimePickerVisibility(true);
+  };
+
+  const hideDatePicker_ = () => {
+    setTimePickerVisibility(false);
+  };
+
+  const handleConfirm_ = (date) => {
+    console.log("A date has been picked: ", String(date));
+    setPickedTime(String(date));
+    hideDatePicker_();
+  };
+  return (<SearchPresenter 
+    isTimePickerVisible={isTimePickerVisible}
+    showDatePicker_={showDatePicker_} 
+    handleConfirm_={handleConfirm_} 
+    hideDatePicker_={hideDatePicker_} 
+    appendelement={appendelement} 
     Search={Search} 
     setSearch={setSearch} 
     isLoading={isLoading}

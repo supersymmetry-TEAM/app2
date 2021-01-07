@@ -9,7 +9,7 @@ import { Feather } from '@expo/vector-icons';
 
 const TotalContainer =styled.View`
 width : 90%;
-borderBottomWidth: 1px;
+border-bottom-width: 1px;
 margin-left : 20px;
 position: relative;
 margin-top : 10px;
@@ -20,9 +20,7 @@ padding-bottom : 15px;
 const TotalBtn = styled.TouchableOpacity`
 `;
 const TextContainer = styled.View`
-alignSelf : flex-start;
 `;
-
 
 // borderBottomColor: 'black',
 // borderBottomWidth: 1,
@@ -102,11 +100,11 @@ const FoodCard = ({ bssh_nm, lcns_no, prdlst_dcnm, prdlst_nm, prdlst_report_no, 
  
 
     <NameContainer>
-    <TotalBtn onPress={() => navigation.navigate("제품정보",{ bssh_nm, lcns_no, prdlst_dcnm, prdlst_nm, prdlst_report_no, prms_dt,
-    rawmtrl_nm, id, is_fav, likes})}>
+    {/* <TotalBtn onPress={() => navigation.navigate("제품정보",{ bssh_nm, lcns_no, prdlst_dcnm, prdlst_nm, prdlst_report_no, prms_dt,
+    rawmtrl_nm, id, is_fav, likes})}> */}
     <Name>{prdlst_nm}</Name>
     <Name1>{bssh_nm}</Name1>
-    </TotalBtn>
+    {/* </TotalBtn> */}
     </NameContainer>
     
     <IconContainer>

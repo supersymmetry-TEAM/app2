@@ -5,12 +5,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import Main from "../navigation/Main"
 
 export default () => {
-  const { isLoggedIn } = useSelector(state => state.usersReducer);
+  const { token } = useSelector(state => state.usersReducer);
   const dispatch = useDispatch();
 
   return (
     <NavigationContainer>
-    {isLoggedIn ? <Main></Main> : <Auth></Auth>}
+    {token ? <Main></Main> : <Auth></Auth>}
   </NavigationContainer>
   );
 };

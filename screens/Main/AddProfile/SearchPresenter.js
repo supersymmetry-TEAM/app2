@@ -22,7 +22,6 @@ flex: 1;
 margin-bottom : 10px; 
 `;
 const SearchContainer = styled.View`
-margin-top:30px;
 flex-direction: row;
 justify-content: center;
 align-items: center;
@@ -57,7 +56,17 @@ export default (probs) => {
 
   return (
     <Container style={{ backgroundColor: '#FFFFFF',flex:1,justifyContent:"center",alignItems:"center",  }}>
-            <SearchContainer>
+      
+      <DateTimePickerModal
+        isVisible={probs.isTimePickerVisible}
+        mode="time"
+        onConfirm={probs.handleConfirm_}
+        onCancel={probs.hideDatePicker_}
+      />
+      <Text>chose time</Text>
+      <Button title="시간선택" style={{width : "100%"}} onPress={() => probs.showDatePicker_()} />
+      <Text>chose food</Text>
+      <SearchContainer>
         <TextInput
           style={{
             textAlign: 'center',
@@ -77,7 +86,9 @@ export default (probs) => {
         <SearchBtnText type = "search" onPress={() => getandgo_by_name()}>검색 !</SearchBtnText>
       </SearchDo> */}
       </SearchContainer>
-      
+      <Text>add!</Text>
+      <Button title="식단추가" onPress={() => probs.appendelement()} />
+
       { probs.isLoading ?
         <MaxContainer>
           <ActivityIndicator color="red" />

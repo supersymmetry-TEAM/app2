@@ -10,12 +10,17 @@ const Container = styled.View`
 `;
 
 
-// navigation.navigate('SignIn', { email, password });
+
+
+
 export default (probs) => {
   return (
 
     <Container style={{ backgroundColor: '#FFFFFF',flex:1,justifyContent:"center",alignItems:"center",  }}>
-      <ScrollView>
+      <ScrollView style={{ width: "100%", marginTop: 20, }}
+
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingTop: 30 }}>
       <DateTimePickerModal
         isVisible={probs.isDatePickerVisible}
         mode="date"
@@ -30,15 +35,7 @@ export default (probs) => {
       />
         <Text  >오늘 식단</Text>
         <Button title={probs.pickedData} onPress={()=>probs.showDatePicker()} />
-        <TextInput
-          style={{
-            height: 40, width: "80%", borderColor: '#F2F2F2',
-            borderRadius: 30, borderWidth: 2, paddingLeft: 10,
 
-          }}
-          autoFocus={true} value={probs.Search}
-          onChangeText={text=>probs.setSearch(text)}
-          placeholder="제품을 입력하세요~" />
 
         <Button title="식단추가" onPress={()=>probs.appendelement()} />
         {probs.diet ?
