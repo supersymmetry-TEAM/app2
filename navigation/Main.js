@@ -9,7 +9,7 @@ import Explore from "../screens/Main/Explore/Index";
 import MyPage from "../screens/Main/MyPage/Index";
 import Search from "../screens/Main/Search/Index";
 import AddProfile from "../screens/Main/AddProfile/Index";
-
+import Food from "../screens/Main/Food/Index"
 const TabNav = createBottomTabNavigator();
 const SearchContainer =  styled.View`
 margin-top : 40px;
@@ -72,6 +72,7 @@ export default () => (
       component={Tabs}
       options={{ headerShown: false }}
     />
+    <MainNavigator.Screen name="먹은양" component={Food} />
     <MainNavigator.Screen name="식단검색" component={Search} />
     <MainNavigator.Screen name="식단추가" component={AddProfile} />
   </MainNavigator.Navigator>

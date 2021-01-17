@@ -28,9 +28,15 @@ justify-content: center;
 align-items: center;
 width: 80%;
 border-radius: 10px;
-
 `;
-
+const SearchContainer_0 = styled.View`
+margin-top:30px;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+width: 100%;
+border-radius: 10px;
+`;
 const MoreDataContainer = styled.View`
 justify-content: center;
 align-items: center;
@@ -51,14 +57,26 @@ margin-top: 40px;
 `;
 
 const Text = styled.Text``;
+const SearchDetail =styled.TouchableOpacity`
+justify-content: center;
+align-items: center;
+width : 20%;
+height : 40px;
+margin-left : 5px;
+margin-right : 5px;
+border-radius : 25px;
+border-width : 1px;
+border-color : black;
 
+`;
 export default (probs) => {
 
-
   return (
-    <Container style={{ backgroundColor: '#FFFFFF',flex:1,justifyContent:"center",alignItems:"center",  }}>
-            <SearchContainer>
+    <Container style={{ backgroundColor: '#FFFFFF', flex: 1, justifyContent: "center", alignItems: "center", }}>
+
+      <SearchContainer>
         <TextInput
+          onSubmitEditing={() => probs.getandgo_by_name()}
           style={{
             textAlign: 'center',
             height: 40, width: "80%", borderColor: '#F2F2F2',
@@ -66,18 +84,31 @@ export default (probs) => {
 
           }}
           // autoFocus={true}
-          type="search"  value={probs.Search}
+          type="search" value={probs.Search}
           onChangeText={text => probs.setSearch(text)}
           placeholder="제품을 입력하세요~" />
         <Feather style={{ marginLeft: 20, }}
           name="search" size={25} onPress={() => probs.getandgo_by_name()}
           color="#4285F4" />
-      
+
         {/* <SearchDo>
         <SearchBtnText type = "search" onPress={() => getandgo_by_name()}>검색 !</SearchBtnText>
       </SearchDo> */}
       </SearchContainer>
-      
+      <SearchContainer_0>
+      <SearchDetail onPress={()=>probs.category("음식")}>
+        <Text>음식</Text>
+      </SearchDetail >
+      <SearchDetail onPress={()=>probs.category("가공식품")}>
+        <Text>가공식품</Text>
+      </SearchDetail>
+      <SearchDetail onPress={()=>probs.category("농축산물")}>
+        <Text>농축산물</Text>
+      </SearchDetail>
+      <SearchDetail onPress={()=>probs.category("수산물")}>
+        <Text>수산물</Text>
+      </SearchDetail>
+      </SearchContainer_0>
       { probs.isLoading ?
         <MaxContainer>
           <ActivityIndicator color="red" />
@@ -107,19 +138,30 @@ export default (probs) => {
             }
             {probs.Data.map(result =>
             (<FoodCard
-              key={result.id}
-              bssh_nm={result.BSSH_NM}
-              lcns_no={result.LCNS_NO}
-              prdlst_dcnm={result.PRDLST_DCNM}
-              prdlst_nm={result.PRDLST_NM}
-              prdlst_report_no={result.PRDLST_REPORT_NO}
-              prms_dt={result.PRMS_DT}
-              rawmtrl_nm={result.RAWMTRL_NM}
-              search_score={result.SEARCH_SCORE}
-              id={result.id}
-              is_fav={result.is_fav}
-              likes={result.likes}
-            />))}
+              DESC_KOR={result.DESC_KOR}
+              FOOD_CD={result.FOOD_CD}
+              GROUP_NAME={result.GROUP_NAME}
+              MAKER_NAME={result.MAKER_NAME}
+              NUM={result.NUM}
+              NUTR_CONT1={result.NUTR_CONT1}
+              NUTR_CONT2={result.NUTR_CONT2}
+              NUTR_CONT3={result.NUTR_CONT3}
+              NUTR_CONT4={result.NUTR_CONT4}
+              NUTR_CONT5={result.NUTR_CONT5}
+              NUTR_CONT6={result.NUTR_CONT6}
+              NUTR_CONT7={result.NUTR_CONT7}
+              NUTR_CONT8={result.NUTR_CONT8}
+              NUTR_CONT9={result.NUTR_CONT9}
+              RESEARCH_YEAR={result.RESEARCH_YEAR}
+              SAMPLING_MONTH_CD={result.SAMPLING_MONTH_CD}
+              SAMPLING_MONTH_NAME={result.SAMPLING_MONTH_NAME}
+              SAMPLING_REGION_CD={result.SAMPLING_REGION_CD}
+              SAMPLING_REGION_NAME={result.SAMPLING_REGION_NAME}
+              SEARCH_SCORE={result.SEARCH_SCORE}
+              SERVING_SIZE={result.SERVING_SIZE}
+              SUB_REF_NAME={result.SUB_REF_NAME}
+              key={result.NUM} />
+            ))}
 
           </ScrollView>
 

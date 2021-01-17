@@ -9,7 +9,7 @@ const callApi = async (method, path, data, jwt) =>
     };
     
     const baseUrl = "http://13.124.7.115:7777";
-    
+
     const fullUrl = baseUrl + path;
     if (method === "get" || method === "delete"){
         return axios[method](fullUrl, { headers });
@@ -26,8 +26,8 @@ export default {
 
     login: form => callApi("post", "/usrs/v1/login/", form),
     
-    foods_by_name: (search,page = 1, id,) => 
-       callApi("get", `/api/v1/foods/search/?pd_name=${search}&page=${page}&id=${id}`,null,null),
+    foods_by_name: (search, page,token) => 
+       callApi("get", `/nutfood/search_nut/?pd_name=${search}&page=${page}`,null,token),
     
     nute_by_name: (foodname,token) => callApi ("get", `/search_nut/?pd_name=${foodname}`,null,token)
   };

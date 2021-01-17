@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { Feather } from '@expo/vector-icons';
 
 
-const TotalContainer =styled.View`
+const TotalContainer = styled.View`
 width : 90%;
 border-bottom-width: 1px;
 margin-left : 20px;
@@ -24,7 +24,7 @@ const TextContainer = styled.View`
 
 // borderBottomColor: 'black',
 // borderBottomWidth: 1,
-const NameContainer =styled.View`
+const NameContainer = styled.View`
 left : 27px;
 `;
 
@@ -40,7 +40,7 @@ width : 60%;
   font-weight: 200;
 
 `;
-const IconContainer =styled.View`
+const IconContainer = styled.View`
 width : 20% ;
 height : 20px;
 position: absolute;
@@ -48,7 +48,7 @@ z-index: 10;
 right: 20px;
 top: 4px;
 `;
-const RecoContainer =styled.View`
+const RecoContainer = styled.View`
 width : 20% ;
 height : 20px ;
 position: absolute;
@@ -57,7 +57,7 @@ left: 0px;
 top: 4px;
 
 `;
-const LIkesContainer =styled.View`
+const LIkesContainer = styled.View`
 position: absolute;
 z-index: 10;
 right: 8px;
@@ -73,78 +73,104 @@ font-size: 15px;
 
 
 function getIconcolor(isFav) {
-    if (isFav) {
-      return "red";
-    }
-    return "#C3E9E8";
+  if (isFav) {
+    return "red";
   }
+  return "#C3E9E8";
+}
+// DESC_KOR: "HEARTY SPOON 순살감자탕"
+// FOOD_CD: "P030080"
+// GROUP_NAME: "즉석식품류"
+// MAKER_NAME: "㈜성보"
+// NUM: 25567
+// NUTR_CONT1: "365"
+// NUTR_CONT2: "31"
+// NUTR_CONT3: "38"
+// NUTR_CONT4: "10"
+// NUTR_CONT5: "5"
+// NUTR_CONT6: "1320"
+// NUTR_CONT7: "95"
+// NUTR_CONT8: "1.3"
+// NUTR_CONT9: "0"
+// RESEARCH_YEAR: "2020"
+// SAMPLING_MONTH_CD: "AVG"
+// SAMPLING_MONTH_NAME: "평균"
+// SAMPLING_REGION_CD: "ZZ"
+// SAMPLING_REGION_NAME: "전국(대표)"
+// SEARCH_SCORE: 0
+// SERVING_SIZE: "500"
+// SUB_REF_NAME: "식약처(20)"
 
+const FoodCard = ({
+  DESC_KOR,
+  FOOD_CD,
+  GROUP_NAME,
+  MAKER_NAME,
+  NUM,
+  NUTR_CONT1,
+  NUTR_CONT2,
+  NUTR_CONT3,
+  NUTR_CONT4,
+  NUTR_CONT5,
+  NUTR_CONT6,
+  NUTR_CONT7,
+  NUTR_CONT8,
+  NUTR_CONT9,
+  RESEARCH_YEAR,
+  SAMPLING_MONTH_CD,
+  SAMPLING_MONTH_NAME,
+  SAMPLING_REGION_CD,
+  SAMPLING_REGION_NAME,
+  SEARCH_SCORE,
+  SERVING_SIZE,
+  SUB_REF_NAME,
+}) => {
+  const navigation = useNavigation();
 
-const FoodCard = ({ bssh_nm, lcns_no, prdlst_dcnm, prdlst_nm, prdlst_report_no, prms_dt,
-    rawmtrl_nm, id, is_fav, likes, search_score}) => 
-   { const [fav, setfav] = useState(is_fav);
-     const [like, setLike] = useState(likes); 
-     const navigation = useNavigation();
-     const dispatch = useDispatch();
-     const lovechange = (id ,fav) =>{
-      // dispatch(toggleFav(id));
-      if(fav === true){
-        setfav(false);
-        setLike(like-1);
-      }else{
-        setfav(true);
-        setLike(like+1);
-      }
-     };
-     return(<TotalContainer>
- 
+  return (<TotalContainer>
 
     <NameContainer>
-    {/* <TotalBtn onPress={() => navigation.navigate("제품정보",{ bssh_nm, lcns_no, prdlst_dcnm, prdlst_nm, prdlst_report_no, prms_dt,
-    rawmtrl_nm, id, is_fav, likes})}> */}
-    <Name>{prdlst_nm}</Name>
-    <Name1>{bssh_nm}</Name1>
-    {/* </TotalBtn> */}
+      <TotalBtn onPress={() => navigation.navigate("먹은양", {
+        DESC_KOR,
+        FOOD_CD,
+        GROUP_NAME,
+        MAKER_NAME,
+        NUM,
+        NUTR_CONT1,
+        NUTR_CONT2,
+        NUTR_CONT3,
+        NUTR_CONT4,
+        NUTR_CONT5,
+        NUTR_CONT6,
+        NUTR_CONT7,
+        NUTR_CONT8,
+        NUTR_CONT9,
+        RESEARCH_YEAR,
+        SAMPLING_MONTH_CD,
+        SAMPLING_MONTH_NAME,
+        SAMPLING_REGION_CD,
+        SAMPLING_REGION_NAME,
+        SEARCH_SCORE,
+        SERVING_SIZE,
+        SUB_REF_NAME,
+      })}>
+        <Name>{DESC_KOR}</Name>
+        <Name1>{MAKER_NAME}</Name1>
+      </TotalBtn>
     </NameContainer>
-    
-    <IconContainer>
-    <TotalBtn onPress={() => lovechange(id, fav)} >
-    <Feather name="heart" size={20} style={{marginLeft : 30}}  color={ getIconcolor(fav) } />
-    </TotalBtn>
-    </IconContainer>
-    <RecoContainer>
-    {search_score>=80 ?
-    <Feather name="thumbs-up" size={20} color="orange" />
-    : <Name1></Name1>
-    }
-    </RecoContainer>
-    
-    <LIkesContainer>
-    <LIkes>{like}</LIkes>
-    </LIkesContainer>
-   
-   
-    
-    
- 
-    </TotalContainer>
-    
-    
-    );};
+
+    {/* <IconContainer>
+      <Feather name="plus" size={20} style={{ marginLeft: 30 }} color="red" />
+    </IconContainer> */}
+  </TotalContainer>
 
 
-FoodCard.propTypes = {  
-    bssh_nm: Pt.string.isRequired,
-    lcns_no: Pt.string.isRequired,
-    prdlst_dcnm: Pt.string.isRequired,
-    prdlst_nm: Pt.string.isRequired,
-    prdlst_report_no: Pt.string.isRequired,
-    prms_dt: Pt.string.isRequired,
-    rawmtrl_nm: Pt.string.isRequired,
-    id:Pt.number.isRequired,
-    is_fav: Pt.bool.isRequired,
-    likes: Pt.number.isRequired,
+  );
+};
 
+
+FoodCard.propTypes = {
+  DESC_KOR: Pt.string.isRequired,
 };
 
 export default FoodCard;        

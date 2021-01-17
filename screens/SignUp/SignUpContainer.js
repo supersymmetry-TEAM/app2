@@ -18,11 +18,11 @@ export default ({ navigation }) => {
       email === "" ||
       password === ""
     ){
-    alert("All fields are required");
+    alert("모든 정보를 입력해 주세요");
     return false;
   }
   if (!isEmail(email)){
-    alert("Please add a valid email");
+    alert("이메일을 다시 확인해 주세요");
     return false;
   }
   return true
@@ -41,8 +41,8 @@ export default ({ navigation }) => {
       }
       );
       if (status === 200 || 201)
-      { console.log("sign in"+status);
-        alert("Account created. Sign in. please.");
+      { 
+        alert("회원가입을 축하합니다. 로그인을 해주세요.");
         navigation.navigate('SignIn', { email, password });
       }
     } catch(e){

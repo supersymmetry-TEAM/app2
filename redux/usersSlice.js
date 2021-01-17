@@ -26,6 +26,7 @@ const userSlice = createSlice({
 });
 export const userLogin = form => async dispatch => {
 try{
+console.log(form);
 const data = await api.login(form);
 if(data){
   console.log(data.data);
