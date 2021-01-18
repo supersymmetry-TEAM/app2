@@ -6,18 +6,34 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default (probs) => {
-  const _today = String(new Date());
+
   console.log(probs);
-  // DAY PICK MODAL
-  const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
-  const [isDialogVisible, setIsDialogVisible] = React.useState(false);
-  const [pickedData, setPickedData] = React.useState(_today);
-  // DAY PICK MODAL
+ 
   
-  // TIME PICK MODAL
-const [isTimePickerVisible, setTimePickerVisibility] = React.useState(false);
-const [pickedTime, setPickedTime] = React.useState("");
-  // TIME PICK MODAL
+  // DAY,TIME PICKER 
+  const [date, setDate] = React.useState(new Date());
+  const [show, setShow] =  React.useState(false);
+  const [mode, setMode] =  React.useState('date');
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(false);
+    console.log(currentDate);
+    setDate(currentDate);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const showDatepicker = () => {
+    showMode('date');
+  };
+
+  const showTimepicker = () => {
+    showMode('time');
+  };
+  
   
   
   // N'TH DIET DATA
@@ -25,37 +41,6 @@ const [pickedTime, setPickedTime] = React.useState("");
   const [diet, setDiet] = React.useState([]);
   const [rerender, setRerender] =React.useState(0);
   const navigation = useNavigation();
-   // N'TH DIET DATA
-
-
-
-  useEffect(() => {
-    console.log("useEffect");
-    const name = `${probs.recodata.length+1} 번쨰 식단`
-    const a = {
-      DESC_KOR: name,
-      NUM : 0,
-    }
-    setDiet([...probs.recodata,a]);
-    console.log(diet);
-  }, [probs.recodata,numberofDiet,rerender]);
-
-  // TIME PICK MODAL
-  const showDatePicker_ = () => {
-    setTimePickerVisibility(true);
-  };
-
-  const hideDatePicker_ = () => {
-    setTimePickerVisibility(false);
-  };
-
-  const handleConfirm_ = (date) => {
-    setPickedTime(String(date));
-    hideDatePicker_();
-  };
- // TIME PICK MODAL
-
-  // N'TH DIET DATA
   const increase_number_of_diet = () => {
     console.log(numberofDiet.length);
     const next_num = numberofDiet.length+1;
@@ -78,8 +63,22 @@ const [pickedTime, setPickedTime] = React.useState("");
     }else{setRerender(0);}
     setNumberofDiet(numberofDiet);
    };
-   // N'TH DIET DATA
+ 
+  // N'TH DIET DATA
 
+
+
+  useEffect(() => {
+    console.log("useEffect");
+    
+    const name = `${probs.recodata.length+1} 번쨰 식단`
+    const a = {
+      DESC_KOR: name,
+      NUM : 0,
+    }
+    setDiet([...probs.recodata,a]);
+    console.log(diet);
+  }, [probs.recodata,numberofDiet,rerender]);
 
 
 
@@ -91,21 +90,9 @@ const [pickedTime, setPickedTime] = React.useState("");
 
 
 
-    // DAY PICK MODAL
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date) => {
-    setPickedData(String(date));
-    hideDatePicker();
-  };
-
-  const make_title_of_date = (date) => {
+    // DAY PICK ALGORITHM
+  const make_title_of_date = (object_date) => {
+    const date =String(object_date);
     const day_of_the_week = day_en_to_ko(date.substring(0, 3));
     const month = month_en_to_ko(date.substring(4, 7));
     const day = date.substring(8, 11);
@@ -177,25 +164,28 @@ const [pickedTime, setPickedTime] = React.useState("");
       return 'error'
     }
   };
-  // DAY PICK MODAL
+
 
   return (<ExplorePresenter
+    // RECORD DATA
     recoData={probs.recoData}
-    isDatePickerVisible={isDatePickerVisible}
-    handleConfirm={handleConfirm}
-    hideDatePicker={hideDatePicker}
-    pickedData={pickedData}
-    showDatePicker={showDatePicker}
+    // DATE TIME PICKER
+    date={date}
+    mode={mode}
+    show = {show}
+    showTimepicker={showTimepicker}
+    showDatepicker={showDatepicker}
+    onChange={onChange}
+    // THINGS
     appendelement={appendelement}
-    isDialogVisible={isDialogVisible}
-    setIsDialogVisible={setIsDialogVisible}
     make_title_of_date={make_title_of_date}
+    
+
+    // N'TH DIET CARD
     diet={diet}
     numberofDiet ={numberofDiet}
     increase_number_of_diet={increase_number_of_diet}
     can_Nth_see={can_Nth_see}
     logout={probs.logOut} />
-
-
   );
 };

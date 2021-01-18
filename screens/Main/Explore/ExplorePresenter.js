@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components/native";
 import { Text, TouchableOpacity, View, TextInput, ScrollView, Button } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { Feather } from '@expo/vector-icons';
 import RecoCard from "../../../components/Main/recoCard"
 const Container = styled.View`
@@ -10,6 +10,12 @@ const Container = styled.View`
   flex: 1;
 `;
 const Container_row = styled.View`
+width : 100%;
+justify-content: center;
+align-items: center;
+flex-direction: row;
+`;
+const Container_row0 = styled.View`
 width : 100%;
 justify-content: center;
 align-items: center;
@@ -50,28 +56,28 @@ export default (probs) => {
 
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingTop: 30 }}>
-        {/* ********** MODAL ************** */}
-        <DateTimePickerModal
-          isVisible={probs.isDatePickerVisible}
-          mode="date"
-          onConfirm={probs.handleConfirm}
-          onCancel={probs.hideDatePicker}
-        />
-        <DateTimePickerModal
-          isVisible={probs.isTimePickerVisible}
-          mode="time"
-          onConfirm={probs.handleConfirm_}
-          onCancel={probs.hideDatePicker_}
-        />
-        {/* ********** MODAL ************** */}
+
 
         {/* Date Part */}
         <Container_col>
-          <DateText>{probs.make_title_of_date(probs.pickedData)}</DateText>
+          <DateText>{probs.make_title_of_date(probs.date)}</DateText>
           <BtnContainer style={{ marginTop: 10, }}>
-            <TouchableOpacity style={{ justifyContent: "center", alignItems: "center", }} onPress={() => probs.showDatePicker()}>
+            <TouchableOpacity 
+            style={{ justifyContent: "center",
+             alignItems: "center", }} 
+             onPress={() => probs.showDatepicker()}>
               <Text>날짜 변경</Text>
             </TouchableOpacity>
+            {probs.show && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={probs.date}
+          mode='date'
+          is24Hour={true}
+          display="default"
+          onChange={probs.onChange}
+        />
+      )}
           </BtnContainer>
         </Container_col>
         {/* Date Part */}
@@ -80,14 +86,14 @@ export default (probs) => {
         <Container_col style={{ marginTop: 10, }}>
 
           {probs.numberofDiet.map((Nth) =>
-            <Container_row  style={{ marginTop: 10, backgroundColor: "#F2BB21", }}>
+            <Container_row0  style={{ marginTop: 10, backgroundColor: "#F2BB21", }}>
               {Nth.num == probs.numberofDiet.length ?
-                <TouchableOpacity key ={String(Nth)} style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", }} onPress={() => probs.increase_number_of_diet()}>
+                <TouchableOpacity key ={"waht the key ???"} style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", }} onPress={() => probs.increase_number_of_diet()}>
                   <Text>{Nth.num} 식사 추가</Text>
                   <Feather style={{ marginRight: 2, }} name="plus" size={22} color="#DF4435" />
                 </TouchableOpacity>
                 :
-                <Container_col key ={String(Nth)}>
+                <Container_col key ={"hellow key?"}>
                   <Container_row>
                   <Text>{Nth.num} 식사</Text>
                   <TouchableOpacity style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", }} onPress={() => probs.can_Nth_see(Nth.num)}>
@@ -105,7 +111,7 @@ export default (probs) => {
               }
 
 
-            </Container_row>
+            </Container_row0>
           )}
 
         </Container_col>
@@ -145,7 +151,7 @@ export default (probs) => {
                   SEARCH_SCORE={result.SEARCH_SCORE}
                   SERVING_SIZE={result.SERVING_SIZE}
                   SUB_REF_NAME={result.SUB_REF_NAME}
-                  key={result.NUM}
+                  key={result.DESC_KOR}
                 />)}
             </Container_col>
             :
